@@ -1,34 +1,27 @@
-import 'dart:async';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 
 void main() async {
-  String username = 'remetente';
-  String password = 'senha'; // senha de app
+  String username = 'francisco.thiago09@aluno.ifce.edu.br';
+  String password = 'tudb umyt byry fyyh';
 
   final smtpServer = gmail(username, password);
 
-  for (int i = 1; i <= 22; i++) {
-    final message = Message()
-      ..from = Address(username, 'Seu Nome')
-      ..recipients.add('destinatario')
-      ..subject = ''
-      ..text = ''
-      ..html = "<";
+  final message = Message()
+    ..from = Address(username, 'thiago-cdb')
+    ..recipients.add('fthiagocordeirodebrito@gmail.com')
+    ..subject = 'Email de teste:: ${DateTime.now()}'
+    ..text = ''
+    ..html =
+        "<h1>Teste SMTP com Dart</h1>\n<p>Este é um email <b>enviado com sucesso</b>.</p>";
 
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('✅ [$i] Email enviado com sucesso.');
-    } on MailerException catch (e) {
-      print('❌ [$i] Falha ao enviar email.');
-      for (var p in e.problems) {
-        print('Problema: ${p.code}: ${p.msg}');
-      }
+  try {
+    final sendReport = await send(message, smtpServer);
+    print('Email enviado: ' + sendReport.toString());
+  } on MailerException catch (e) {
+    print('Falha ao enviar email.');
+    for (var p in e.problems) {
+      print('Problema: ${p.code}: ${p.msg}');
     }
-
-    // Aguarda 3 segundos entre os envios para evitar bloqueios
-    await Future.delayed(Duration(seconds: 3));
   }
-
-  print('\n🎯 Fim do envio de 22 e-mails.');
 }
