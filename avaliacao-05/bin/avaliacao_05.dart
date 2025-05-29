@@ -17,7 +17,7 @@ void main() async {
 
   try {
     final sendReport = await send(message, smtpServer);
-    print('Email enviado: ' + sendReport.toString());
+    print('Email enviado: $sendReport');
   } on MailerException catch (e) {
     print('Falha ao enviar email.');
     for (var p in e.problems) {

@@ -1,0 +1,10 @@
+name: prova_pratica_dart
+description: Projeto Dart para o sistema de revenda
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  mailer: ^6.0.1
+  path: ^1.8.3
